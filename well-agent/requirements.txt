@@ -1,2 +1,4 @@
-pydantic
-pytest
+openai>=1.40
+pydantic>=2.7
+mcp>=2.0,<3
+pytest>=8.0

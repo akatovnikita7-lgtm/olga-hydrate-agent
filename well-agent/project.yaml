@@ -1,3 +1,13 @@
-name: well-agent
-pair: ""
+name: <project-name>
+pair:
+  - <student-one>
+  - <student-two>
 entrypoint: agent.py
+
+mcp:
+  transport: stdio
+  server_path: mcp_server/server.py
+
+simulator:
+  name: <PVTP|PROSPER|PIPESIM|GAP|OLGA>
+  execution: local
