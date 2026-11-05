@@ -1,7 +1,10 @@
 name: <project-name>
 pair:
-  - <student-one>
-  - <student-two>
+  - Никита Акатов
+  - Григорий Мелешко
+  - Калачев Никита
+  - Чудинов Павел
+  - Борисов Роман
 entrypoint: agent.py
 
 mcp:
@@ -9,5 +12,5 @@ mcp:
   server_path: mcp_server/server.py
 
 simulator:
-  name: <PVTP|PROSPER|PIPESIM|GAP|OLGA>
+  name: OLGA
   execution: local
