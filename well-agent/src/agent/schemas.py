@@ -12,6 +12,8 @@ class BenchContext(BaseModel):
     llm_api_key: str
     llm_model: str
     mcp_server_url: str | None = None
+    mcp_server_args: tuple[str, ...] | None = None
+    mcp_timeout_s: float | None = Field(default=None, gt=0, allow_inf_nan=False)
 
 
 class Value(BaseModel):

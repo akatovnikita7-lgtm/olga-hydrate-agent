@@ -76,22 +76,40 @@ python3 -m venv .venv
 [`scripts/run_mcp.ps1`](scripts/run_mcp.ps1) и
 [`scripts/run_tests.ps1`](scripts/run_tests.ps1).
 
-## Что уже есть в шаблоне
+### Проверка stdio-клиента
+
+Из `well-agent` запустите тест рукопожатия, списка инструментов и чтения манифеста.
+
+```sh
+.venv/bin/python -m pytest -q -s tests/test_mcp_stdio.py::test_stdio_manifest
+```
+
+В PowerShell используйте `.\.venv\Scripts\python.exe` с теми же аргументами.
+Тест запускает отдельный процесс из `tests/fixtures/`. Строка `TEST MODE` в выводе
+обозначает тестовый манифест. Для проверки штатной команды с текущим сервером
+запустите `tests/test_mcp_stdio.py::test_default_stdio_command_uses_project_server`.
+
+Клиент запускает сервер тем же интерпретатором Python из каталога `well-agent`.
+В `BenchContext` можно задать `mcp_server_args`, по умолчанию
+`["-m", "mcp_server.server"]`, и `mcp_timeout_s`, по умолчанию 10 с на операцию.
+Для stdio оставьте `mcp_server_url` пустым. При непустом запросе точка входа
+проверяет доступность MCP и возвращает `error` при сбое. Сценарные инструменты
+и подтверждение описаны в [черновике контракта](docs/mcp-contract-draft.md).
+
+## Что уже есть
 
 - контракт `run(request, ctx) -> AgentResult`
 - Pydantic-схемы результата, чисел и журнала
-- порт `ToolGateway` и заготовка MCP-клиента `McpToolGateway` в [`src/agent/tools.py`](src/agent/tools.py)
+- порт `ToolGateway` и stdio-клиент `McpToolGateway` в [`src/agent/tools.py`](src/agent/tools.py)
 - локальный MCP-сервер с инструментом проверки конфигурации `get_simulator_status`
   и инструментом `run_simulation`, который передаёт вызов адаптеру симулятора
-- минимальные тесты структуры и контракта
+- тесты контракта агента, адаптера и stdio-клиента
 
 ## Что предстоит реализовать
 
 - В `EngineeringAgent.run` добавить разбор запроса через LLM, выбор и вызов
   MCP-инструментов, проверку единиц, диапазонов и полноты данных, заполнение
   `values`, `sources` и `trace`.
-- В `McpToolGateway.list_tools` и `McpToolGateway.call_tool` реализовать подключение
-  к MCP-серверу по `stdio`, получение списка инструментов и их вызов.
 - В [`SimulatorClient.run_case`](mcp_server/simulator/client.py) подключить OLGA,
   запускать подготовленный сценарий и получать временные ряды расхода и давления.
   Добавить обработку таймаутов, ошибок симулятора и лицензии.
