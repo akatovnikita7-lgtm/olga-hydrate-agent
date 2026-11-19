@@ -11,10 +11,14 @@ from pathlib import Path
 from typing import Any, Protocol, TypeVar
 
 from anyio import fail_after
+from jsonschema.exceptions import SchemaError, ValidationError
+from jsonschema.validators import validator_for
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from mcp.shared.exceptions import MCPError
 from mcp.types import CallToolResult, PaginatedRequestParams, TextContent
+from referencing import Registry
+from referencing.exceptions import Unresolvable
 
 
 _PROJECT_DIR = Path(__file__).resolve().parents[2]
@@ -29,7 +33,9 @@ class ToolGateway(Protocol):
         """Вернуть описания доступных инструментов."""
         ...
 
-    def call_tool(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
+    def call_tool(
+        self, name: str, arguments: dict[str, Any], *, check_schema: bool = False
+    ) -> dict[str, Any]:
         """Вызвать инструмент и вернуть структурированный результат."""
         ...
 
@@ -85,7 +91,26 @@ class McpToolSession:
                 cursors.add(cursor)
                 params = PaginatedRequestParams(cursor=cursor)
 
-    async def call_tool(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
+    async def _check_tool_arguments(self, name: str, arguments: dict[str, Any]) -> None:
+        tools = await self.list_tools()
+        tool = next((item for item in tools if item["name"] == name), None)
+        if tool is None:
+            raise McpGatewayError("TOOL_NOT_ADVERTISED", f"Сервер MCP не объявил инструмент {name}.")
+        schema = tool["inputSchema"]
+        try:
+            validator = validator_for(schema)
+            validator.check_schema(schema)
+            validator(schema, registry=Registry()).validate(arguments)
+        except (SchemaError, ValidationError, Unresolvable) as error:
+            raise McpGatewayError(
+                "INCOMPATIBLE_MCP_SCHEMA", f"Аргументы {name} несовместимы с объявленной схемой MCP."
+            ) from error
+
+    async def call_tool(
+        self, name: str, arguments: dict[str, Any], *, check_schema: bool = False
+    ) -> dict[str, Any]:
+        if check_schema:
+            await self._check_tool_arguments(name, arguments)
         with _mcp_errors("tools/call", self._timeout_s), fail_after(self._timeout_s):
             result = await self._session.call_tool(name, arguments)
 
@@ -161,8 +186,10 @@ class McpToolGateway:
     def list_tools(self) -> list[dict[str, Any]]:
         return self._run(McpToolSession.list_tools)
 
-    def call_tool(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
-        return self._run(lambda session: session.call_tool(name, arguments))
+    def call_tool(
+        self, name: str, arguments: dict[str, Any], *, check_schema: bool = False
+    ) -> dict[str, Any]:
+        return self._run(lambda session: session.call_tool(name, arguments, check_schema=check_schema))
 
     def _run(self, operation: Callable[[McpToolSession], Awaitable[_Result]]) -> _Result:
         async def execute() -> _Result:

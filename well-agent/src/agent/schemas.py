@@ -14,6 +14,7 @@ class BenchContext(BaseModel):
     mcp_server_url: str | None = None
     mcp_server_args: tuple[str, ...] | None = None
     mcp_timeout_s: float | None = Field(default=None, gt=0, allow_inf_nan=False)
+    mcp_case_id: str | None = None
 
 
 class RequestedTime(BaseModel):
@@ -48,6 +49,43 @@ class RequestIntent(BaseModel):
     requested_outputs: list[RequestedOutput]
 
 
+class ScenarioSchedule(BaseModel):
+    model_config = ConfigDict(strict=True, extra="forbid")
+
+    event_time_s: FiniteFloat
+    transition_s: FiniteFloat
+    end_time_s: FiniteFloat
+
+
+class CaseManifest(BaseModel):
+    """Часть MCP-манифеста, необходимая для проверки запроса."""
+
+    model_config = ConfigDict(strict=True)
+
+    schema_version: str = Field(min_length=1)
+    case_id: str = Field(min_length=1)
+    model_fingerprint: str = Field(min_length=1)
+    schedule: ScenarioSchedule
+    allowed_parameters: dict[str, Any]
+    trace_id: str | None = None
+    mode: str | None = None
+
+
+class ValidatedRequest(BaseModel):
+    case_id: str
+    model_fingerprint: str
+    schedule: ScenarioSchedule
+    parameter_sources: dict[str, Literal["request", "manifest"]]
+    requested_outputs: list[RequestedOutput]
+
+
+class RequestRejection(BaseModel):
+    code: str
+    field: str
+    received_value: Any = None
+    reason: str
+
+
 class Value(BaseModel):
     """Число из ответа симулятора с обязательной единицей измерения."""
 
@@ -73,3 +111,6 @@ class AgentResult(BaseModel):
     values: list[Value] = Field(default_factory=list)
     sources: list[str] = Field(default_factory=list)
     trace: list[ToolCall] = Field(default_factory=list)
+    trace_id: str | None = None
+    validated_request: ValidatedRequest | None = None
+    rejection: RequestRejection | None = None

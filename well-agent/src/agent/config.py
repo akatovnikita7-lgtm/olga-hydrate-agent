@@ -24,4 +24,5 @@ def load_context() -> BenchContext:
         llm_base_url=settings["LLM_BASE_URL"],
         llm_model=settings["LLM_MODEL"],
         llm_api_key=settings["LLM_API_KEY"],
+        mcp_case_id=os.environ.get("MCP_CASE_ID", file_values.get("MCP_CASE_ID")) or None,
     )

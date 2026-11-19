@@ -5,7 +5,8 @@ from pathlib import Path
 import pytest
 
 from agent import run
-from src.agent.schemas import BenchContext
+from src.agent import loop
+from src.agent.schemas import BenchContext, RequestIntent
 from src.agent.tools import McpGatewayError, McpToolGateway
 
 
@@ -88,16 +89,21 @@ def test_default_stdio_command_uses_project_server(monkeypatch: pytest.MonkeyPat
     assert gateway.call_tool("get_simulator_status", {})["simulator"] == "OLGA"
 
 
-def test_entrypoint_reports_stdio_connection_error() -> None:
+def test_entrypoint_reports_stdio_connection_error(monkeypatch: pytest.MonkeyPatch) -> None:
     context = BenchContext(
         llm_base_url="https://example.invalid/v1",
         llm_api_key="test-key",
         llm_model="test-model",
         mcp_server_args=("-m", "missing_mcp_server_for_test"),
     )
+    intent = RequestIntent(
+        action="simulate_bypass", case_id="mbsnu_bypass_96h", event_time=None,
+        transition_duration=None, end_time=None, requested_outputs=[],
+    )
+    monkeypatch.setattr(loop, "parse_request", lambda request, context: intent)
 
     result = run("Проверь соединение", context)
 
     assert result.status == "error"
-    assert "Не удалось подключиться к MCP" in result.answer
+    assert "Не удалось прочитать MCP-манифест" in result.answer
     assert result.values == []
