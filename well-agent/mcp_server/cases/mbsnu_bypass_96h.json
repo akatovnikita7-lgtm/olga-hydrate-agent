@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "case_id": "mbsnu_bypass_96h",
+  "title": "Обход МБСНУ: перевод потока с сепаратора на байпас",
+  "model_id": "case1_obhod",
+  "olga_version_expected": "OLGA 2021.2.0.32322",
+  "flow_model": "OLGAHD",
+  "input_file": "case1_obhod.genkey",
+  "kit_files": ["case1_obhod.genkey", "Novosam_T1_HeaderFix.tab"],
+  "optional_kit_files": ["case1_obhod.opi"],
+  "expected_outputs": {
+    "out": "case1_obhod.out",
+    "trend": "case1_obhod.tpl",
+    "profile": "case1_obhod.ppl"
+  },
+  "normal_stop_marker": "NORMAL STOP IN EXECUTION",
+  "schedule": {
+    "event_time_s": 172800,
+    "transition_s": 60,
+    "transition_end_s": 172860,
+    "end_time_s": 345600,
+    "display": {"event_time": "48 ч", "transition": "60 с", "end_time": "96 ч"},
+    "interpolation_note": "Между точками TIME значения задаются OLGA; закон изменения (линейная рампа или иной) подтверждает автор модели. Сервер этого не утверждает."
+  },
+  "allowed_parameters": {
+    "event_time_s": {"allowed_values": [172800], "unit": "s"},
+    "transition_s": {"allowed_values": [60], "unit": "s"},
+    "end_time_s": {"allowed_values": [345600], "unit": "s"}
+  },
+  "schedule_checks": [
+    {
+      "object": "VALVE-2",
+      "keyword": "VALVE",
+      "label": "VALVE-2",
+      "branch": "ByPass",
+      "time_key": "TIME",
+      "value_key": "OPENING",
+      "values": [0, 0, 1],
+      "value_unit": "-",
+      "meaning": "клапан байпаса: закрыт -> открыт"
+    },
+    {
+      "object": "VALVE Separator",
+      "keyword": "VALVE",
+      "label": "VALVE Separator",
+      "branch": "Separator Tube",
+      "time_key": "TIME",
+      "value_key": "OPENING",
+      "values": [1, 1, 0],
+      "value_unit": "-",
+      "meaning": "клапан ветви сепаратора: открыт -> закрыт"
+    },
+    {
+      "object": "Pump",
+      "keyword": "PARAMETERS",
+      "label": "Pump",
+      "time_key": "TIME",
+      "value_key": "MASSFLOW",
+      "values": [9.989051, 9.989051, 0],
+      "value_unit": "kg/s",
+      "meaning": "граничный узел MASSFLOW (источник) Pump: подача -> 0"
+    }
+  ],
+  "objects": [
+    {"id": "AGZU 4", "type": "NODE MASSFLOW", "role": "вход 1", "note": "0.87617 kg/s"},
+    {"id": "AGZU 7 + AGZU-60", "type": "NODE MASSFLOW", "role": "вход 2", "note": "8.618999 kg/s"},
+    {"id": "AGZU 6", "type": "NODE MASSFLOW", "role": "вход 3", "note": "0.651475 kg/s"},
+    {"id": "MBSNU", "type": "JUNCTIONNODE", "role": "смешение трёх входов"},
+    {"id": "Separator Tube", "type": "FLOWPATH", "role": "ветвь сепаратора (VALVE Separator, CHECK-4)"},
+    {"id": "Separator", "type": "NODE PRESSURE", "role": "граница 6 bara, заменяет сепаратор"},
+    {"id": "ByPass", "type": "FLOWPATH", "role": "байпас (VALVE-2, CHECK-3)"},
+    {"id": "Pump", "type": "NODE MASSFLOW", "role": "источник расхода; не физическая модель насоса"},
+    {"id": "MBSNU - AGZU 2", "type": "FLOWPATH", "role": "выход к АГЗУ-2, 16 км"},
+    {"id": "AGZU 2", "type": "NODE PRESSURE", "role": "граница 10 bara"},
+    {"id": "NODE_10", "type": "NODE PRESSURE", "role": "граница 10 bara за закрытым VALVE-3 - Copy"}
+  ],
+  "checkpoints": [
+    {"location_id": "GT@SEPARATOR TUBE", "variable": "GT", "branch": "SEPARATOR TUBE", "unit": "KG/S", "meaning": "массовый расход в ветви сепаратора"},
+    {"location_id": "GT@BYPASS", "variable": "GT", "branch": "BYPASS", "unit": "KG/S", "meaning": "массовый расход через байпас"},
+    {"location_id": "GT@MBSNU - AGZU 2", "variable": "GT", "branch": "MBSNU - AGZU 2", "unit": "KG/S", "meaning": "расход на АГЗУ-2"},
+    {"location_id": "GT@PUMP TUBE - COPY", "variable": "GT", "branch": "PUMP TUBE - COPY", "unit": "KG/S", "meaning": "подача Pump (знак минус: поток от узла Pump)"},
+    {"location_id": "GT@MBSNU TUBE", "variable": "GT", "branch": "MBSNU TUBE", "unit": "KG/S", "meaning": "суммарный поток после МБСНУ"},
+    {"location_id": "PT@MBSNU TUBE", "variable": "PT", "branch": "MBSNU TUBE", "unit": "PA", "pressure_scale": "абсолютное (по описанию OLGA), подтвердить", "meaning": "давление после МБСНУ"},
+    {"location_id": "PT@MBSNU - AGZU 2", "variable": "PT", "branch": "MBSNU - AGZU 2", "unit": "PA", "pressure_scale": "абсолютное (по описанию OLGA), подтвердить", "meaning": "давление в начале линии на АГЗУ-2"}
+  ],
+  "known_gaps": [
+    "Положение клапанов (VALVOP) в трендах модели не выводится: состояние клапанов видно только по расписанию и расходам.",
+    "DTPLOT=10 с: на переход 60 с приходится около 6-7 сохранённых точек."
+  ]
+}
