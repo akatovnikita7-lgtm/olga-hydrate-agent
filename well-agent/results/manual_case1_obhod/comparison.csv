@@ -1,0 +1,2 @@
+﻿metric,manual_value,automatic_value,absolute_error,relative_error_pct,assessment,reason
+manual_vs_automatic,,,,,NOT_ASSESSED,Нет результатов автоматического запуска

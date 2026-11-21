@@ -2,16 +2,88 @@
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, FiniteFloat
 
 
 class BenchContext(BaseModel):
     """Настройки, которые передаёт бенчмарк или демо-ноутбук."""
 
     llm_base_url: str
-    llm_api_key: str
+    llm_api_key: str = Field(repr=False)
     llm_model: str
     mcp_server_url: str | None = None
+    mcp_server_args: tuple[str, ...] | None = None
+    mcp_timeout_s: float | None = Field(default=None, gt=0, allow_inf_nan=False)
+    mcp_case_id: str | None = None
+
+
+class RequestedTime(BaseModel):
+    """Число и единица из запроса до перевода в секунды."""
+
+    model_config = ConfigDict(strict=True, extra="forbid")
+
+    value: FiniteFloat
+    unit: str | None
+
+
+class RequestedOutput(BaseModel):
+    """Показатель, точка и форма вывода, которые указал пользователь."""
+
+    model_config = ConfigDict(strict=True, extra="forbid")
+
+    metric: str
+    location: str | None
+    presentation: Literal["plot", "table"] | None
+
+
+class RequestIntent(BaseModel):
+    """Извлечённые параметры запроса на расчёт."""
+
+    model_config = ConfigDict(strict=True, extra="forbid")
+
+    action: Literal["simulate_bypass", "unsupported", "unclear"]
+    case_id: str | None
+    event_time: RequestedTime | None
+    transition_duration: RequestedTime | None
+    end_time: RequestedTime | None
+    requested_outputs: list[RequestedOutput]
+
+
+class ScenarioSchedule(BaseModel):
+    model_config = ConfigDict(strict=True, extra="forbid")
+
+    event_time_s: FiniteFloat
+    transition_s: FiniteFloat
+    end_time_s: FiniteFloat
+
+
+class CaseManifest(BaseModel):
+    """Часть MCP-манифеста, необходимая для проверки запроса."""
+
+    model_config = ConfigDict(strict=True)
+
+    schema_version: str = Field(min_length=1)
+    case_id: str = Field(min_length=1)
+    model_fingerprint: str = Field(min_length=1)
+    schedule: ScenarioSchedule
+    allowed_parameters: dict[str, Any]
+    trace_id: str | None = None
+    mode: str | None = None
+
+
+class ValidatedRequest(BaseModel):
+    case_id: str
+    model_fingerprint: str
+    schedule: ScenarioSchedule
+    parameter_sources: dict[str, Literal["request", "manifest"]]
+    requested_outputs: list[RequestedOutput]
+
+
+class RequestRejection(BaseModel):
+    code: str
+    field: str
+    received_value: Any = None
+    reason: str
 
 
 class Value(BaseModel):
@@ -39,3 +111,6 @@ class AgentResult(BaseModel):
     values: list[Value] = Field(default_factory=list)
     sources: list[str] = Field(default_factory=list)
     trace: list[ToolCall] = Field(default_factory=list)
+    trace_id: str | None = None
+    validated_request: ValidatedRequest | None = None
+    rejection: RequestRejection | None = None

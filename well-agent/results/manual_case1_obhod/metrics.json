@@ -1,0 +1,656 @@
+{
+    "schema_version": "1.0",
+    "run_type": "manual_reference",
+    "source_artifact": "case1_obhod.tpl",
+    "time_range_s": {
+        "start": 0.0,
+        "end": 345600.6,
+        "points": 34561
+    },
+    "event": {
+        "event_time_s": 172800,
+        "transition_duration_s": 60,
+        "transition_end_s": 172860
+    },
+    "period_summary": [
+        {
+            "period": "До переключения",
+            "branch": "BYPASS",
+            "points": 360,
+            "PT_mean_MPa": 0.6029027939,
+            "PT_min_MPa": 0.6029008,
+            "PT_max_MPa": 0.6029045,
+            "QLT_mean_m3_h": 8.34e-08,
+            "QLT_min_m3_h": -0.0027471128,
+            "QLT_max_m3_h": 0.0019626984
+        },
+        {
+            "period": "До переключения",
+            "branch": "SEPARATOR TUBE",
+            "points": 360,
+            "PT_mean_MPa": 0.6020843525,
+            "PT_min_MPa": 0.6020828,
+            "PT_max_MPa": 0.6020857,
+            "QLT_mean_m3_h": 41.5392365,
+            "QLT_min_m3_h": 41.5296,
+            "QLT_max_m3_h": 41.548068
+        },
+        {
+            "period": "До переключения",
+            "branch": "PUMPTUBE",
+            "points": 360,
+            "PT_mean_MPa": 1.0938007972,
+            "PT_min_MPa": 1.093797,
+            "PT_max_MPa": 1.093804,
+            "QLT_mean_m3_h": -41.6906917,
+            "QLT_min_m3_h": -41.691348,
+            "QLT_max_m3_h": -41.68998
+        },
+        {
+            "period": "До переключения",
+            "branch": "MBSNU - AGZU 2",
+            "points": 360,
+            "PT_mean_MPa": 1.0884287306,
+            "PT_min_MPa": 1.088426,
+            "PT_max_MPa": 1.088431,
+            "QLT_mean_m3_h": 41.6874903,
+            "QLT_min_m3_h": 41.673024,
+            "QLT_max_m3_h": 41.702076
+        },
+        {
+            "period": "До переключения",
+            "branch": "MBSNU TUBE",
+            "points": 360,
+            "PT_mean_MPa": 0.6052024458,
+            "PT_min_MPa": 0.6051988,
+            "PT_max_MPa": 0.6052057,
+            "QLT_mean_m3_h": 41.5440219,
+            "QLT_min_m3_h": 41.535144,
+            "QLT_max_m3_h": 41.55282
+        },
+        {
+            "period": "До переключения",
+            "branch": "AGZU 4 - MBSNU",
+            "points": 360,
+            "PT_mean_MPa": 0.6052732308,
+            "PT_min_MPa": 0.6052707,
+            "PT_max_MPa": 0.6052757,
+            "QLT_mean_m3_h": 3.61494353,
+            "QLT_min_m3_h": 3.6137016,
+            "QLT_max_m3_h": 3.6161172
+        },
+        {
+            "period": "Переходный процесс",
+            "branch": "BYPASS",
+            "points": 720,
+            "PT_mean_MPa": 1.2504485351,
+            "PT_min_MPa": 0.6031254,
+            "PT_max_MPa": 1.34975,
+            "QLT_mean_m3_h": 40.4859137051,
+            "QLT_min_m3_h": -6.6591576,
+            "QLT_max_m3_h": 65.807532
+        },
+        {
+            "period": "Переходный процесс",
+            "branch": "SEPARATOR TUBE",
+            "points": 720,
+            "PT_mean_MPa": 1.2509105661,
+            "PT_min_MPa": 0.6022444,
+            "PT_max_MPa": 1.350234,
+            "QLT_mean_m3_h": 0.3227960608,
+            "QLT_min_m3_h": -1.05603588,
+            "QLT_max_m3_h": 43.74666
+        },
+        {
+            "period": "Переходный процесс",
+            "branch": "PUMPTUBE",
+            "points": 720,
+            "PT_mean_MPa": 1.2654052611,
+            "PT_min_MPa": 1.043797,
+            "PT_max_MPa": 1.348294,
+            "QLT_mean_m3_h": -0.4274185935,
+            "QLT_min_m3_h": -41.669964,
+            "QLT_max_m3_h": 5.9934996
+        },
+        {
+            "period": "Переходный процесс",
+            "branch": "MBSNU - AGZU 2",
+            "points": 720,
+            "PT_mean_MPa": 1.2571361625,
+            "PT_min_MPa": 1.043412,
+            "PT_max_MPa": 1.339104,
+            "QLT_mean_m3_h": 47.456378355,
+            "QLT_min_m3_h": 6.4111356,
+            "QLT_max_m3_h": 70.444368
+        },
+        {
+            "period": "Переходный процесс",
+            "branch": "MBSNU TUBE",
+            "points": 720,
+            "PT_mean_MPa": 1.2524628853,
+            "PT_min_MPa": 0.6052753,
+            "PT_max_MPa": 1.351939,
+            "QLT_mean_m3_h": 41.1902906757,
+            "QLT_min_m3_h": 0.0,
+            "QLT_max_m3_h": 65.237292
+        },
+        {
+            "period": "Переходный процесс",
+            "branch": "AGZU 4 - MBSNU",
+            "points": 720,
+            "PT_mean_MPa": 1.1941057374,
+            "PT_min_MPa": 0.6052775,
+            "PT_max_MPa": 1.352025,
+            "QLT_mean_m3_h": 3.454557717,
+            "QLT_min_m3_h": 1.86423084,
+            "QLT_max_m3_h": 4.8832596
+        },
+        {
+            "period": "После переключения",
+            "branch": "BYPASS",
+            "points": 2160,
+            "PT_mean_MPa": 1.202719,
+            "PT_min_MPa": 1.202719,
+            "PT_max_MPa": 1.202719,
+            "QLT_mean_m3_h": 41.7199133333,
+            "QLT_min_m3_h": 41.719896,
+            "QLT_max_m3_h": 41.719932
+        },
+        {
+            "period": "После переключения",
+            "branch": "SEPARATOR TUBE",
+            "points": 2160,
+            "PT_mean_MPa": 1.203193,
+            "PT_min_MPa": 1.203193,
+            "PT_max_MPa": 1.203193,
+            "QLT_mean_m3_h": 0.0,
+            "QLT_min_m3_h": 0.0,
+            "QLT_max_m3_h": 0.0
+        },
+        {
+            "period": "После переключения",
+            "branch": "PUMPTUBE",
+            "points": 2160,
+            "PT_mean_MPa": 1.201192,
+            "PT_min_MPa": 1.201192,
+            "PT_max_MPa": 1.201192,
+            "QLT_mean_m3_h": 2.133e-07,
+            "QLT_min_m3_h": 1.872e-07,
+            "QLT_max_m3_h": 2.434e-07
+        },
+        {
+            "period": "После переключения",
+            "branch": "MBSNU - AGZU 2",
+            "points": 2160,
+            "PT_mean_MPa": 1.1914483074,
+            "PT_min_MPa": 1.191448,
+            "PT_max_MPa": 1.191449,
+            "QLT_mean_m3_h": 41.7151226667,
+            "QLT_min_m3_h": 41.715108,
+            "QLT_max_m3_h": 41.715144
+        },
+        {
+            "period": "После переключения",
+            "branch": "MBSNU TUBE",
+            "points": 2160,
+            "PT_mean_MPa": 1.204956,
+            "PT_min_MPa": 1.204956,
+            "PT_max_MPa": 1.204956,
+            "QLT_mean_m3_h": 41.7208827167,
+            "QLT_min_m3_h": 41.720868,
+            "QLT_max_m3_h": 41.720904
+        },
+        {
+            "period": "После переключения",
+            "branch": "AGZU 4 - MBSNU",
+            "points": 2160,
+            "PT_mean_MPa": 1.205035681,
+            "PT_min_MPa": 1.205035,
+            "PT_max_MPa": 1.205036,
+            "QLT_mean_m3_h": 3.6307947883,
+            "QLT_min_m3_h": 3.6307944,
+            "QLT_max_m3_h": 3.630798
+        }
+    ],
+    "transition_summary": [
+        {
+            "branch": "BYPASS",
+            "max_pressure_MPa": 1.34975,
+            "max_pressure_time_h": 49.5946111111,
+            "max_flow_m3_h": 65.807532,
+            "max_flow_time_h": 48.1725555556,
+            "min_flow_m3_h": -6.6591576,
+            "min_flow_time_h": 48.0307777778,
+            "pressure_stabilization_h": 52.4639166667,
+            "flow_stabilization_h": 49.5140555556
+        },
+        {
+            "branch": "SEPARATOR TUBE",
+            "max_pressure_MPa": 1.350234,
+            "max_pressure_time_h": 49.5973055556,
+            "max_flow_m3_h": 43.74666,
+            "max_flow_time_h": 48.0028888889,
+            "min_flow_m3_h": -1.05603588,
+            "min_flow_time_h": 48.2501388889,
+            "pressure_stabilization_h": 52.4639166667,
+            "flow_stabilization_h": 48.5973333333
+        },
+        {
+            "branch": "PUMPTUBE",
+            "max_pressure_MPa": 1.348294,
+            "max_pressure_time_h": 49.5946111111,
+            "max_flow_m3_h": 5.9934996,
+            "max_flow_time_h": 48.1141944444,
+            "min_flow_m3_h": -41.669964,
+            "min_flow_time_h": 48.0000833333,
+            "pressure_stabilization_h": 52.4639166667,
+            "flow_stabilization_h": 48.9389166667
+        },
+        {
+            "branch": "MBSNU - AGZU 2",
+            "max_pressure_MPa": 1.339104,
+            "max_pressure_time_h": 49.5946111111,
+            "max_flow_m3_h": 70.444368,
+            "max_flow_time_h": 48.2806388889,
+            "min_flow_m3_h": 6.4111356,
+            "min_flow_time_h": 48.1141944444,
+            "pressure_stabilization_h": 52.4639166667,
+            "flow_stabilization_h": 51.9167222222
+        },
+        {
+            "branch": "MBSNU TUBE",
+            "max_pressure_MPa": 1.351939,
+            "max_pressure_time_h": 49.5946111111,
+            "max_flow_m3_h": 65.237292,
+            "max_flow_time_h": 48.1725555556,
+            "min_flow_m3_h": 0.0,
+            "min_flow_time_h": 48.0195555556,
+            "pressure_stabilization_h": 52.4639166667,
+            "flow_stabilization_h": 49.7444722222
+        },
+        {
+            "branch": "AGZU 4 - MBSNU",
+            "max_pressure_MPa": 1.352025,
+            "max_pressure_time_h": 49.5946111111,
+            "max_flow_m3_h": 4.8832596,
+            "max_flow_time_h": 48.5750555556,
+            "min_flow_m3_h": 1.86423084,
+            "min_flow_time_h": 48.20575,
+            "pressure_stabilization_h": 52.4639166667,
+            "flow_stabilization_h": 49.6945277778
+        }
+    ],
+    "interval_volumes": [
+        {
+            "branch": "AGZU 4 - MBSNU",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": 3.6148029412,
+            "integral_QLT_m3": 3.6149399773,
+            "difference_m3": -0.0001370361,
+            "relative_error_pct": 0.003790827,
+            "mean_flow_m3_h": 3.6149399773
+        },
+        {
+            "branch": "AGZU 4 - MBSNU",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 16.0709957895,
+            "integral_QLT_m3": 16.0716430807,
+            "difference_m3": -0.0006472912,
+            "relative_error_pct": 0.0040275359,
+            "mean_flow_m3_h": 3.5714762401
+        },
+        {
+            "branch": "AGZU 4 - MBSNU",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 12.7038983853,
+            "integral_QLT_m3": 12.7039411817,
+            "difference_m3": -4.27965e-05,
+            "relative_error_pct": 0.0003368755,
+            "mean_flow_m3_h": 3.6296974805
+        },
+        {
+            "branch": "AGZU 60,7 - AGZU 4",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": 35.436,
+            "integral_QLT_m3": 35.4360643306,
+            "difference_m3": -6.43306e-05,
+            "relative_error_pct": 0.00018154,
+            "mean_flow_m3_h": 35.4360643306
+        },
+        {
+            "branch": "AGZU 60,7 - AGZU 4",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 159.9209622291,
+            "integral_QLT_m3": 159.9209791973,
+            "difference_m3": -1.69682e-05,
+            "relative_error_pct": 1.06104e-05,
+            "mean_flow_m3_h": 35.5379953772
+        },
+        {
+            "branch": "AGZU 60,7 - AGZU 4",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 124.6600954522,
+            "integral_QLT_m3": 124.6603179641,
+            "difference_m3": -0.0002225119,
+            "relative_error_pct": 0.0001784946,
+            "mean_flow_m3_h": 35.617233704
+        },
+        {
+            "branch": "AGZU 6 - AGZU 4",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": 2.4918,
+            "integral_QLT_m3": 2.4918413259,
+            "difference_m3": -4.13259e-05,
+            "relative_error_pct": 0.0016584473,
+            "mean_flow_m3_h": 2.4918413259
+        },
+        {
+            "branch": "AGZU 6 - AGZU 4",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 11.1071677709,
+            "integral_QLT_m3": 11.1073035856,
+            "difference_m3": -0.0001358147,
+            "relative_error_pct": 0.0012227516,
+            "mean_flow_m3_h": 2.4682896857
+        },
+        {
+            "branch": "AGZU 6 - AGZU 4",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 8.7298274604,
+            "integral_QLT_m3": 8.7298993239,
+            "difference_m3": -7.18635e-05,
+            "relative_error_pct": 0.000823188,
+            "mean_flow_m3_h": 2.4942569497
+        },
+        {
+            "branch": "MBSNU TUBE",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": 41.5430294118,
+            "integral_QLT_m3": 41.5436481847,
+            "difference_m3": -0.0006187729,
+            "relative_error_pct": 0.0014894525,
+            "mean_flow_m3_h": 41.5436481847
+        },
+        {
+            "branch": "MBSNU TUBE",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 187.2611043344,
+            "integral_QLT_m3": 187.2386165214,
+            "difference_m3": 0.022487813,
+            "relative_error_pct": 0.0120088008,
+            "mean_flow_m3_h": 41.6085814492
+        },
+        {
+            "branch": "MBSNU TUBE",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 146.0674048033,
+            "integral_QLT_m3": 146.0678042855,
+            "difference_m3": -0.0003994823,
+            "relative_error_pct": 0.000273491,
+            "mean_flow_m3_h": 41.7336583673
+        },
+        {
+            "branch": "BYPASS",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": -3.01615e-05,
+            "integral_QLT_m3": -0.0001517069,
+            "difference_m3": 0.0001215454,
+            "relative_error_pct": null,
+            "mean_flow_m3_h": -0.0001517069
+        },
+        {
+            "branch": "BYPASS",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 185.7367188205,
+            "integral_QLT_m3": 185.7268156969,
+            "difference_m3": 0.0099031236,
+            "relative_error_pct": 0.0053318071,
+            "mean_flow_m3_h": 41.2726257104
+        },
+        {
+            "branch": "BYPASS",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 146.0641201737,
+            "integral_QLT_m3": 146.0648292056,
+            "difference_m3": -0.0007090319,
+            "relative_error_pct": 0.0004854227,
+            "mean_flow_m3_h": 41.7328083445
+        },
+        {
+            "branch": "SEPARATOR TUBE",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": 41.5389705882,
+            "integral_QLT_m3": 41.5396122011,
+            "difference_m3": -0.0006416129,
+            "relative_error_pct": 0.0015445809,
+            "mean_flow_m3_h": 41.5396122011
+        },
+        {
+            "branch": "SEPARATOR TUBE",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 0.5654705882,
+            "integral_QLT_m3": 0.5964672173,
+            "difference_m3": -0.030996629,
+            "relative_error_pct": 5.1967028743,
+            "mean_flow_m3_h": 0.1325482705
+        },
+        {
+            "branch": "SEPARATOR TUBE",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 0.0,
+            "integral_QLT_m3": 0.0,
+            "difference_m3": 0.0,
+            "relative_error_pct": null,
+            "mean_flow_m3_h": 0.0
+        },
+        {
+            "branch": "PUMPTUBE",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": -41.6890294118,
+            "integral_QLT_m3": -41.6906632108,
+            "difference_m3": 0.001633799,
+            "relative_error_pct": 0.0039188608,
+            "mean_flow_m3_h": -41.6906632108
+        },
+        {
+            "branch": "PUMPTUBE",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": -0.8364411765,
+            "integral_QLT_m3": -0.8411315749,
+            "difference_m3": 0.0046903985,
+            "relative_error_pct": 0.5576295792,
+            "mean_flow_m3_h": -0.1869181278
+        },
+        {
+            "branch": "PUMPTUBE",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 0.004,
+            "integral_QLT_m3": 0.0043835571,
+            "difference_m3": -0.0003835571,
+            "relative_error_pct": null,
+            "mean_flow_m3_h": 0.0012524449
+        },
+        {
+            "branch": "MBSNU - AGZU 2",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": 41.687,
+            "integral_QLT_m3": 41.6874709035,
+            "difference_m3": -0.0004709035,
+            "relative_error_pct": 0.0011296045,
+            "mean_flow_m3_h": 41.6874709035
+        },
+        {
+            "branch": "MBSNU - AGZU 2",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 201.0981337461,
+            "integral_QLT_m3": 201.0894306573,
+            "difference_m3": 0.0087030888,
+            "relative_error_pct": 0.004327782,
+            "mean_flow_m3_h": 44.6865401461
+        },
+        {
+            "branch": "MBSNU - AGZU 2",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 145.8054630557,
+            "integral_QLT_m3": 145.8060891394,
+            "difference_m3": -0.0006260837,
+            "relative_error_pct": 0.0004293948,
+            "mean_flow_m3_h": 41.6588826113
+        },
+        {
+            "branch": "PUMP TUBE - COPY (2)",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": 0.0,
+            "integral_QLT_m3": 0.0,
+            "difference_m3": 0.0,
+            "relative_error_pct": null,
+            "mean_flow_m3_h": 0.0
+        },
+        {
+            "branch": "PUMP TUBE - COPY (2)",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": 0.0,
+            "integral_QLT_m3": 0.0,
+            "difference_m3": 0.0,
+            "relative_error_pct": null,
+            "mean_flow_m3_h": 0.0
+        },
+        {
+            "branch": "PUMP TUBE - COPY (2)",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 0.0,
+            "integral_QLT_m3": 0.0,
+            "difference_m3": 0.0,
+            "relative_error_pct": null,
+            "mean_flow_m3_h": 0.0
+        },
+        {
+            "branch": "PUMP TUBE - COPY",
+            "period": "До переключения",
+            "start_h": 47.0,
+            "end_h": 48.0,
+            "delta_ACCLIQ_m3": -41.691,
+            "integral_QLT_m3": -41.6911078315,
+            "difference_m3": 0.0001078315,
+            "relative_error_pct": 0.000258644,
+            "mean_flow_m3_h": -41.6911078315
+        },
+        {
+            "branch": "PUMP TUBE - COPY",
+            "period": "Переходный процесс",
+            "start_h": 48.0,
+            "end_h": 52.5,
+            "delta_ACCLIQ_m3": -0.6704705882,
+            "integral_QLT_m3": -0.6765303595,
+            "difference_m3": 0.0060597712,
+            "relative_error_pct": 0.8957131253,
+            "mean_flow_m3_h": -0.1503400799
+        },
+        {
+            "branch": "PUMP TUBE - COPY",
+            "period": "После стабилизации",
+            "start_h": 52.5,
+            "end_h": 56.0,
+            "delta_ACCLIQ_m3": 0.003,
+            "integral_QLT_m3": 0.0028405205,
+            "difference_m3": 0.0001594795,
+            "relative_error_pct": null,
+            "mean_flow_m3_h": 0.0008115773
+        }
+    ],
+    "preliminary_network_balance": [
+        {
+            "period": "До переключения",
+            "inlet_volume_m3": 83.2339534653,
+            "outlet_volume_m3": 83.2270831047,
+            "volume_difference_m3": 0.0068703607,
+            "inlet_mass_kg": 71921.0088411627,
+            "outlet_mass_kg": 71916.3733407056,
+            "mass_difference_kg": 4.6355004571,
+            "inlet_mean_m3_h": 83.2339534653,
+            "outlet_mean_m3_h": 83.2270831047
+        },
+        {
+            "period": "Переходный процесс",
+            "inlet_volume_m3": 187.7764562231,
+            "outlet_volume_m3": 201.6858978745,
+            "volume_difference_m3": -13.9094416515,
+            "inlet_mass_kg": 162071.0366750559,
+            "outlet_mass_kg": 173716.9178922206,
+            "mass_difference_kg": -11645.8812171647,
+            "inlet_mean_m3_h": 41.7281013829,
+            "outlet_mean_m3_h": 44.8190884166
+        },
+        {
+            "period": "После стабилизации",
+            "inlet_volume_m3": 146.0941584698,
+            "outlet_volume_m3": 145.8089296599,
+            "volume_difference_m3": 0.2852288098,
+            "inlet_mass_kg": 125852.8931904801,
+            "outlet_mass_kg": 125591.0784864912,
+            "mass_difference_kg": 261.8147039889,
+            "inlet_mean_m3_h": 41.7411881342,
+            "outlet_mean_m3_h": 41.6596941886
+        }
+    ],
+    "engineering_assessment": "NOT_ASSESSED",
+    "limitations": [
+        "Нет результатов автоматического запуска для сравнения.",
+        "Полный динамический баланс не подтвержден: отсутствуют данные об изменении запаса жидкости.",
+        "Инженерные допуски пока не согласованы."
+    ]
+}
