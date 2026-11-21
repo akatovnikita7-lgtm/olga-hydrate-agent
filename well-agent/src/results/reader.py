@@ -81,19 +81,144 @@ def load_run(path: str | Path):
         raise ValueError("Количество столбцов не совпадает с каталогом")
     return data, catalog_df
 
+
+
+
+
 def check_data(data):
-    time = data["time_s"]
-    intervals = time.diff().dropna()
+    errors = []
+    warnings = []
+
+    if data.empty:
+        return {
+            "valid": False,
+            "errors": ["Таблица пустая"],
+            "warnings": [],
+            "rows": 0,
+            "columns": 0
+        }
+
+    if "time_s" not in data.columns:
+        return {
+            "valid": False,
+            "errors": ["Отсутствует столбец time_s"],
+            "warnings": [],
+            "rows": len(data),
+            "columns": len(data.columns)
+        }
+
+    time = pd.to_numeric(data["time_s"], errors="coerce")
+    time_values = time.to_numpy(dtype=float)
+
+    invalid_time = int(time.isna().sum())
+    finite_time = bool(np.isfinite(time_values).all())
+    if invalid_time > 0:
+        errors.append(
+            f"Некорректных значений времени: {invalid_time}"
+        )
+    if not finite_time:
+        errors.append("Время содержит бесконечные значения")
+    negative_time = bool(
+        np.any(
+            np.isfinite(time_values)
+            & (time_values < 0)
+        )
+    )
+    if negative_time:
+        errors.append("Отрицательное время моделирования")
+    duplicates = int(time.duplicated().sum())
+    if duplicates > 0:
+        errors.append(
+            f"Обнаружено повторяющихся временных отметок: {duplicates}"
+        )
+    intervals = np.diff(time_values)
+    monotonic = bool(
+    len(time_values) >= 2
+    and finite_time
+    and np.all(intervals > 0)
+    )
+    if len(time_values) < 2:
+        errors.append("Недостаточно точек для анализа")
+    elif finite_time and not monotonic:
+        errors.append("Время не является строго возрастающим")
+    missing = int(data.isna().sum().sum())
+    if missing > 0:
+        errors.append(
+            f"Обнаружено пропущенных значений: {missing}"
+        )
+
+    for column in data.columns:
+        if column == "time_s":
+            continue
+        converted = pd.to_numeric(
+            data[column],
+            errors="coerce"
+        )
+        invalid_mask = (
+            data[column].notna()
+            & converted.isna()
+        )
+        invalid_count = int(invalid_mask.sum())
+
+        if invalid_count > 0:
+            errors.append(
+                f"Нечисловых значений в столбце "
+                f"{column}: {invalid_count}"
+            )
+
+    numeric_data = data.apply(
+        pd.to_numeric,
+        errors="coerce"
+    )
+    numeric_values = numeric_data.to_numpy(dtype=float)
+    finite = bool(
+        numeric_values.size > 0
+        and np.isfinite(numeric_values).all()
+    )
+    if not finite:
+        errors.append(
+            "Числовые данные содержат NaN или бесконечности"
+        )
+
+    if finite_time and len(intervals) > 0:
+        mean_interval = float(np.mean(intervals))
+        median_interval = float(np.median(intervals))
+        min_interval = float(np.min(intervals))
+        max_interval = float(np.max(intervals))
+
+        if median_interval > 0 and np.all(intervals > 0):
+            max_interval_ratio = (
+                max_interval / median_interval
+            )
+        else:
+            max_interval_ratio = None
+    else:
+        mean_interval = None
+        median_interval = None
+        min_interval = None
+        max_interval = None
+        max_interval_ratio = None
     return {
+        "valid": len(errors) == 0,
+        "errors": errors,
+        "warnings": warnings,
         "rows": len(data),
         "columns": len(data.columns),
-        "start_time": time.iloc[0],
-        "end_time": time.iloc[-1],
-        "monotonic": time.is_monotonic_increasing,
-        "duplicates": time.duplicated().sum(),
-        "missing": data.isna().sum().sum(),
-        "finite": np.isfinite(data.to_numpy()).all(),
-        "mean_interval": intervals.mean(),
-        "min_interval": intervals.min(),
-        "max_interval": intervals.max()
+        "start_time": (
+            float(time_values[0])
+            if finite_time else None
+        ),
+        "end_time": (
+            float(time_values[-1])
+            if finite_time else None
+        ),
+        "monotonic": monotonic,
+        "duplicates": duplicates,
+        "missing": missing,
+        "finite": finite,
+        "mean_interval": mean_interval,
+        "median_interval": median_interval,
+        "min_interval": min_interval,
+        "max_interval": max_interval,
+        "max_interval_ratio": max_interval_ratio
     }
