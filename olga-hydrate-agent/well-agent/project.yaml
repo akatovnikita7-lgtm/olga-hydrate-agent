@@ -1,0 +1,16 @@
+name: <project-name>
+pair:
+  - Никита Акатов
+  - Григорий Мелешко
+  - Калачев Никита
+  - Чудинов Павел
+  - Борисов Роман
+entrypoint: agent.py
+
+mcp:
+  transport: stdio
+  server_path: mcp_server/server.py
+
+simulator:
+  name: OLGA
+  execution: local
