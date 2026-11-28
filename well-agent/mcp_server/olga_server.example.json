@@ -1,0 +1,16 @@
+{
+  "adapter_mode": "real",
+  "case_kit_dir": "C:/OLGA_data/MBSNU",
+  "launcher": "<ПРОВЕРЕННЫЙ путь к исполняемому файлу OLGA>",
+  "launcher_args": ["{input}"],
+  "runs_root": "C:/OLGA_data/runs",
+  "log_dir": "C:/OLGA_data/logs",
+  "run_timeout_s": 3600,
+  "max_concurrent_runs": 1,
+  "plan_ttl_s": 3600,
+  "require_zero_exit_code": true,
+  "launcher_detaches": false,
+  "license_error_patterns": [],
+  "no_solution_patterns": [],
+  "results_analyzer": "src.results:analyze_run"
+}
