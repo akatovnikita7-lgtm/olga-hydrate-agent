@@ -3,3 +3,18 @@ __pycache__/
 *.pyc
 .venv/
 .ipynb_checkpoints/
+
+# Данные и результаты OLGA не публикуются (руководство, стр. 4)
+**/.env
+**/.pytest_cache/
+local_data/
+well-agent/local_data/
+well-agent/runs/
+well-agent/logs/
+*.genkey
+*.opi
+*.opp
+*.tab
+*.tpl
+*.ppl
+*.out
